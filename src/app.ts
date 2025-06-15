@@ -19,13 +19,15 @@ app.post("/create-note", async (req: Request, res: Response) => {
     });
 
     await newNote.save();
-    
+
     res.status(201).json({
         success: true,
         message: "Note created successfully",
         note: newNote,
     })
 });
+
+
 
 app.get("/", (req: Request, res: Response) => {
 

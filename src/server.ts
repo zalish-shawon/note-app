@@ -16,8 +16,8 @@ async function main() {
             console.log(`Server is running on ${port}`);
         });
 
-    } catch (erro) {
-        console.error('An error occurred while starting the server:', erro);
+    } catch (error) {
+        console.error('An error occurred while starting the server:', error);
     }
 }
 
