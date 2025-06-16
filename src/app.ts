@@ -65,6 +65,17 @@ app.get("/note/:noteId", async (req: Request, res: Response) => {
     })
 });
 
+app.patch("/note/:noteId", async (req: Request, res: Response) => {
+
+    const noteId = req.params.noteId;
+    const note = await Note.findById(noteId);
+    res.status(201).json({
+        success: true,
+        message: "Notes read successfully",
+       note,
+    })
+});
+
 
 
 app.get("/", (req: Request, res: Response) => {
