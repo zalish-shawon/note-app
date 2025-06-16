@@ -66,10 +66,20 @@ app.get("/note/:noteId", (req, res) => __awaiter(void 0, void 0, void 0, functio
 }));
 app.patch("/note/:noteId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const noteId = req.params.noteId;
-    const note = yield Note.findById(noteId);
+    const updatedBody = req.body;
+    const note = yield Note.findByIdAndUpdate(noteId, updatedBody);
     res.status(201).json({
         success: true,
-        message: "Notes read successfully",
+        message: "Note updated successfully",
+        note,
+    });
+}));
+app.delete("/note/:noteId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const noteId = req.params.noteId;
+    const note = yield Note.findByIdAndDelete(noteId);
+    res.status(201).json({
+        success: true,
+        message: "Note deleted successfully",
         note,
     });
 }));
