@@ -4,26 +4,52 @@ import mongoose, { model, Schema } from "mongoose";
 
 const app: Application = express();
 
+app.use(express.json());
+
+// First create schema
+// Then create model
+// Then create instance of model
+// Then save the instance to the database or save the model directly in body
+
 const noteSchema = new Schema({
-    title: String,
-    content: String,
+    title: {type: String, required: true, trim: true},
+        content: {type: String, default: "", trim: true},
+        category: {
+            type: String,
+            enum: ["work", "personal", "other"],
+            default: "other",
+        },
+        pinned: {
+            type: Boolean,
+            default: false,
+        }
 })
 
 
 const Note = model("Note", noteSchema);
 
-app.post("/create-note", async (req: Request, res: Response) => {
-    const newNote = new Note({
-        title: "Learning Mongoose",
-        content: "Using Mongoose to interact with MongoDB is easy and efficient.",
-    });
+app.post("/notes/create-note", async (req: Request, res: Response) => {
 
-    await newNote.save();
+    const body = req.body;
+    // const newNote = new Note({
+    //     title: "Learning Mongoose",
+    // });
 
+    // await newNote.save();
+    const note = await Note.create(body);
     res.status(201).json({
         success: true,
         message: "Note created successfully",
-        note: newNote,
+       note,
+    })
+});
+app.get("/notes", async (req: Request, res: Response) => {
+
+    const note = await Note.find();
+    res.status(201).json({
+        success: true,
+        message: "Notes read successfully",
+       note,
     })
 });
 

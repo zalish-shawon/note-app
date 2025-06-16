@@ -15,21 +15,44 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = require("mongoose");
 const app = (0, express_1.default)();
+app.use(express_1.default.json());
+// First create schema
+// Then create model
+// Then create instance of model
+// Then save the instance to the database or save the model directly in body
 const noteSchema = new mongoose_1.Schema({
-    title: String,
-    content: String,
+    title: { type: String, required: true, trim: true },
+    content: { type: String, default: "", trim: true },
+    category: {
+        type: String,
+        enum: ["work", "personal", "other"],
+        default: "other",
+    },
+    pinned: {
+        type: Boolean,
+        default: false,
+    }
 });
 const Note = (0, mongoose_1.model)("Note", noteSchema);
-app.post("/create-note", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const newNote = new Note({
-        title: "Learning Mongoose",
-        content: "Using Mongoose to interact with MongoDB is easy and efficient.",
-    });
-    yield newNote.save();
+app.post("/notes/create-note", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    // const newNote = new Note({
+    //     title: "Learning Mongoose",
+    // });
+    // await newNote.save();
+    const note = yield Note.create(body);
     res.status(201).json({
         success: true,
         message: "Note created successfully",
-        note: newNote,
+        note,
+    });
+}));
+app.get("/notes", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const note = yield Note.find();
+    res.status(201).json({
+        success: true,
+        message: "Notes read successfully",
+        note,
     });
 }));
 app.get("/", (req, res) => {
