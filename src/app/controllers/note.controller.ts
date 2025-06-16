@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Note } from "../models/notes.models";
+import { Note } from "../models/note.models";
 
 export const notesRoutes = express.Router();
 

@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import mongoose, { model, Schema } from "mongoose";
-import { Note } from "./app/models/notes.models";
-import { notesRoutes } from "./app/controllers/notes.controllers";
+import { Note } from "./app/models/note.models";
+import { notesRoutes } from "./app/controllers/note.controller";
 
 
 const app: Application = express();
