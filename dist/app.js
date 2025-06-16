@@ -55,6 +55,15 @@ app.get("/notes", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         note,
     });
 }));
+app.get("/note/:noteId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const noteId = req.params.noteId;
+    const note = yield Note.findById(noteId);
+    res.status(201).json({
+        success: true,
+        message: "Notes read successfully",
+        note,
+    });
+}));
 app.get("/", (req, res) => {
     res.send("Hello, World!");
 });

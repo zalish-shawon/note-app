@@ -43,9 +43,21 @@ app.post("/notes/create-note", async (req: Request, res: Response) => {
        note,
     })
 });
+
 app.get("/notes", async (req: Request, res: Response) => {
 
     const note = await Note.find();
+    res.status(201).json({
+        success: true,
+        message: "Notes read successfully",
+       note,
+    })
+});
+
+app.get("/note/:noteId", async (req: Request, res: Response) => {
+
+    const noteId = req.params.noteId;
+    const note = await Note.findById(noteId);
     res.status(201).json({
         success: true,
         message: "Notes read successfully",
