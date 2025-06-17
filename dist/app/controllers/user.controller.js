@@ -16,7 +16,7 @@ exports.usersRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const user_model_1 = require("../models/user.model");
 exports.usersRoutes = express_1.default.Router();
-exports.usersRoutes.post("/create-note", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.usersRoutes.post("/create-user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     const user = yield user_model_1.User.create(body);
     res.status(201).json({
