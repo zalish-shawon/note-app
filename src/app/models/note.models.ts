@@ -12,6 +12,11 @@ const noteSchema = new Schema<INote>({
         pinned: {
             type: Boolean,
             default: false,
+        },
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
         }
 })
 

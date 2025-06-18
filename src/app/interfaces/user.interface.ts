@@ -3,5 +3,7 @@ export interface IUser  {
     lastName: String,
     email: String,
     password: String,
-    role: 'user'| 'admin'
+    age: Number,
+    role: 'user'| 'admin',
+    
 }

@@ -30,7 +30,7 @@ exports.notesRoutes.post("/create-note", (req, res) => __awaiter(void 0, void 0,
     });
 }));
 exports.notesRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const note = yield note_models_1.Note.find();
+    const note = yield note_models_1.Note.find().populate("userId");
     res.status(201).json({
         success: true,
         message: "Notes read successfully",
